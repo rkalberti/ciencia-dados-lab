@@ -12244,7 +12244,7 @@ const bd = [
     }
   ];
 
-  const notasDeCorte = [
+    const notasDeCorte = [
     {
       curso: "Medicina",
       modalidade: "bacharelado",
@@ -12302,11 +12302,11 @@ const bd = [
       modalidade: "licenciatura",
       historicoCotas: {
         universal: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
+          2016: "2898", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
           2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
         },
         publica: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
+          2016: "2162", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
           2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
         },
         negros: {
@@ -12406,23 +12406,23 @@ const bd = [
       modalidade: "bacharelado",
       historicoCotas: {
         universal: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
+          2016: "2976", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
           2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
         },
         publica: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
+          2016: "2559", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
           2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
         },
         negros: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
+          2016: null, 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
           2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
         },
         negrosPublica: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
+          2016: "1902", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
           2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
         },
         pcd: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
+          2016: null, 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
           2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
         }
       }
@@ -12480,7 +12480,3 @@ const bd = [
 }
 }
 ];
-
-
-
-

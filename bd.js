@@ -12169,37 +12169,77 @@ const bd = [
                   ]},
   ];
 
-  const salarios = {
-    "Medicina": {
+  const salarios = [
+    {
+      curso: "Medicina",
       profissao: "Médico Generalista",
-      salarioMedio: 7.113
+      modalidade: "bacharelado",
+      piso: "valores",
+      media: 7.113,
+      teto: "valores"
     },
-    "Ciências Biológicas - bacharelado": {
+    {
+      curso: "Ciências Biológicas",
       profissao: "Biologo",
-      salarioMedio: 4.599
+      modalidade: "bacharelado",
+      piso: "valores",
+      media: 4.599,
+      teto: "valores"
     },
-    "Ciências Biológicas - licenciatura": {
+    {
+      curso: "Ciências Biológicas",
       profissao: "Professor de Biologia",
-      salarioMedio: 4.639 //salarios brasil 
+      modalidade: "licenciatura",
+      piso: "valores",
+      media: 4.639,
+      teto: "valores"
     },
-    "Química - licenciatura": {
+    {
+      curso: "Química Tecnológica",
+      profissao: "Químico Tecnológico",
+      modalidade: "bacharelado",
+      piso: "valores",
+      media: "valores",
+      teto: "valores"
+    },
+    {
+      curso: "Química",
       profissao: "Professor de Quimica",
-      salarioMedio: 4.642
+      modalidade: "licenciatura",
+      piso: "valores",
+      media: 4.642,
+      teto: "valores"
     },
-    "Música - licenciatura": {
+    {
+      curso: "Música",
       profissao: "Professor de Musica",
-      salarioMedio: 4.200
+      modalidade: "licenciatura",
+      piso: "valores",
+      media: 4.200,
+      teto: "valores"
     },
-    "Administração": {
+    {
+      curso: "Administração",
       profissao: "Admistrador",
-      salarioMedio: 5.089
+      modalidade: "bacharelado",
+      piso: "valores",
+      media: 5.089,
+      teto: "valores"
     },
-    "Artes Visuais - licenciatura": {
+    {
+      curso: "Artes Visuais",
       profissao: "Professor",
-      salarioMedio: 4.300
+      modalidade: "licenciatura",
+      piso: "valores",
+      media: 4.300,
+      teto: "valores"
     },
-    "Letras - licenciatura - Português/Inglês": {
+    {
+      curso: "Letras - Português/Inglês",
       profissao: "Professor",
-      salarioMedio: 4.600
-    },
-  };
+      modalidade: "licenciatura",
+      piso: "valores",
+      media: 4.600,
+      teto: "valores"
+    }
+  ];

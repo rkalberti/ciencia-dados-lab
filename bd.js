@@ -12432,24 +12432,24 @@ const bd = [
       modalidade: "licenciatura",
       historicoCotas: {
         universal: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
+          2016: "2596", 2017: "3110", 2018: "3081", 2019: "3329", 2020: "2773",
+          2021: null, 2022: "3114", 2023: "3539", 2024: "3945", 2025: "3642"
         },
         publica: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
+          2016: "2354", 2017: "2643", 2018: "2840", 2019: "2540", 2020: "2079",
+          2021: null, 2022: "2633", 2023: "2753", 2024: "3566", 2025: "3130"
         },
         negros: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
+          2016: null, 2017: null, 2018: null, 2019: null, 2020: null,
+          2021: null, 2022: null, 2023: null, 2024: "3229", 2025: "3512"
         },
         negrosPublica: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
+          2016: null, 2017: "1919", 2018: null, 2019: "2201", 2020: null,
+          2021: null, 2022: "1981", 2023: "3163", 2024: "2462", 2025: "2648"
         },
         pcd: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
+          2016: null, 2017: null, 2018: null, 2019: null, 2020: null,
+          2021: null, 2022: "3942", 2023: "2744", 2024: "2372", 2025: "2747"
         }
       }
     },

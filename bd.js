@@ -12195,14 +12195,6 @@ const bd = [
       teto: "valores"
     },
     {
-      curso: "Química Tecnológica",
-      profissao: "Químico Tecnológico",
-      modalidade: "bacharelado",
-      piso: "valores",
-      media: "valores",
-      teto: "valores"
-    },
-    {
       curso: "Química",
       profissao: "Professor de Quimica",
       modalidade: "licenciatura",
@@ -12234,14 +12226,6 @@ const bd = [
       media: 4.300,
       teto: "valores"
     },
-    {
-      curso: "Letras - Português/Inglês",
-      profissao: "Professor",
-      modalidade: "licenciatura",
-      piso: "valores",
-      media: 4.600,
-      teto: "valores"
-    }
   ];
 
     const notasDeCorte = [
@@ -12250,24 +12234,24 @@ const bd = [
       modalidade: "bacharelado",
       historicoCotas: {
         universal: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
+          2016: "5868", 2017: "5484", 2018: "5784", 2019: "5650", 2020: "5910",
+          2021: "6160", 2022: "5857", 2023: "valores", 2024: "valores", 2025: "valores"
         },
         publica: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
+          2016: "5142", 2017: "4971", 2018: "5224", 2019: "5101", 2020: "5206",
+          2021: "5587", 2022: "5139", 2023: "valores", 2024: "valores", 2025: "valores"
         },
         negros: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
+          2016: null, 2017: null, 2018: null, 2019: null, 2020: null,
+          2021: null, 2022: "5151", 2023: "valores", 2024: "valores", 2025: "valores"
         },
         negrosPublica: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
+          2016: "4499", 2017: "4400", 2018: "4857", 2019: "4648", 2020: "4397",
+          2021: "4177", 2022: "4185", 2023: "valores", 2024: "valores", 2025: "valores"
         },
         pcd: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
+          2016: null, 2017: null, 2018: null, 2019: null, 2020: null,
+          2021: null, 2022: "4210", 2023: "valores", 2024: "valores", 2025: "valores"
         }
       }
     },
@@ -12323,32 +12307,7 @@ const bd = [
         }
       }
     },
-    {
-      curso: "Química Tecnológica",
-      modalidade: "bacharelado",
-      historicoCotas: {
-        universal: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
-        },
-        publica: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
-        },
-        negros: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
-        },
-        negrosPublica: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
-        },
-        pcd: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
-        }
-      }
-    },
+    
     {
       curso: "Química",
       modalidade: "licenciatura",
@@ -12453,30 +12412,5 @@ const bd = [
         }
       }
     },
-    {
-      curso: "Letras - Português/Inglês",
-      modalidade: "licenciatura",
-      historicoCotas: {
-        universal: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
-        },
-        publica: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
-        },
-        negros: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
-        },
-        negrosPublica: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
-        },
-        pcd: {
-          2016: "valores", 2017: "valores", 2018: "valores", 2019: "valores", 2020: "valores",
-          2021: "valores", 2022: "valores", 2023: "valores", 2024: "valores", 2025: "valores"
-}
-}
 }
 ];

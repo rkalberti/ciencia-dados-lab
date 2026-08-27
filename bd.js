@@ -12174,57 +12174,57 @@ const bd = [
       curso: "Medicina",
       profissao: "Médico Generalista",
       modalidade: "bacharelado",
-      piso: "valores",
-      media: 7.113,
-      teto: "valores"
+      piso: 7166,
+      media: 13.430,
+      teto: 26.632
     },
     {
       curso: "Ciências Biológicas",
       profissao: "Biologo",
       modalidade: "bacharelado",
-      piso: "valores",
-      media: 4.599,
-      teto: "valores"
+      piso: 3.751,
+      media: 4.399,
+      teto: 7.382
     },
     {
       curso: "Ciências Biológicas",
       profissao: "Professor de Biologia",
       modalidade: "licenciatura",
-      piso: "valores",
-      media: 4.639,
-      teto: "valores"
+      piso: 2.357,
+      media: 4.590,
+      teto: 7307
     },
     {
       curso: "Química",
       profissao: "Professor de Quimica",
       modalidade: "licenciatura",
-      piso: "valores",
-      media: 4.642,
-      teto: "valores"
+      piso: 2.372,
+      media: 4.673,
+      teto: 7.954
     },
     {
       curso: "Música",
       profissao: "Professor de Musica",
       modalidade: "licenciatura",
-      piso: "valores",
-      media: 4.200,
-      teto: "valores"
+      piso: 2202,
+      media: 3.741,
+      teto: 6.331
     },
     {
       curso: "Administração",
       profissao: "Admistrador",
       modalidade: "bacharelado",
-      piso: "valores",
-      media: 5.089,
-      teto: "valores"
+      piso: 3.628,
+      media: 5.081,
+      teto: 9.195
     },
     {
       curso: "Artes Visuais",
       profissao: "Professor",
       modalidade: "licenciatura",
-      piso: "valores",
-      media: 4.300,
-      teto: "valores"
+      piso: 2.297,
+      media: 4.293,
+      teto: 7.032
     },
   ];
 

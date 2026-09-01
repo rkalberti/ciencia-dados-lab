@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relação Candidato por Vaga (2016 - 2025)</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-color: #0f172a;
+      --border-color: #e2e8f0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-color);
+    }
+
+    header {
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin: 0 0 8px 0;
+    }
+
+    p {
+      color: #64748b;
+      margin: 0;
+    }
+
+    .controls {
+      margin: 20px 0;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    select {
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background-color: #fff;
+      font-size: 1rem;
+      color: var(--text-color);
+      outline: none;
+      cursor: pointer;
+    }
+
+    select:focus {
+      border-color: #2563eb;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 480px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+    <header>
+      <h1>Evolução da Relação Candidato por Vaga (2016 - 2025)</h1>
+      <p>Selecione um curso para visualizar a tendência da concorrência por modalidade de cota.</p>
+    </header>
+
+    <div class="controls">
+      <label for="cursoSelect"><strong>Curso:</strong></label>
+      <select id="cursoSelect"></select>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="graficoConcorrencia"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+const anos = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"];
+
+const dadosConcorrencia = [
+  {
+    curso: "Administração",
+    detalhe: "Noturno - Ponta Grossa",
+    historico: {
+      universal:     { 2016: 14.600, 2017: 11.533, 2018: 12.533, 2019: 11.733, 2020: 4.633, 2021: 12.933, 2022: 5.417, 2023: 3.583, 2024: 4.208, 2025: 3.792 },
+      publica:       { 2016: 15.750, 2017: 14.167, 2018: 10.917, 2019: 12.917, 2020: 5.042, 2021: 10.417, 2022: 6.333, 2023: 5.417, 2024: 12.000, 2025: 12.375 },
+      negros:        { 2016: 3.333,  2017: 2.667,  2018: 1.333,  2019: 1.667,  2020: null,  2021: null,   2022: 2.000, 2023: 2.000, 2024: 1.000, 2025: 1.667 },
+      negrosPublica: { 2016: null,   2017: null,   2018: null,   2019: null,   2020: 1.167, 2021: 2.667,  2022: 1.333, 2023: 1.167, 2024: 2.000, 2025: 2.333 },
+      pcd:           { 2016: null,   2017: null,   2018: null,   2019: null,   2020: null,  2021: null,   2022: 0.667, 2023: 1.000, 2024: 0.667, 2025: 1.000 },
+      total:         { 2016: 13.933, 2017: 11.533, 2018: 10.767, 2019: 11.200, 2020: 4.450, 2021: 10.900, 2022: 4.967, 2023: 3.867, 2024: 4.864, 2025: 4.818 }
+    }
+  },
+  {
+    curso: "Medicina",
+    detalhe: "Integral - Ponta Grossa",
+    historico: {
+      universal:     { 2016: 230.714, 2017: 215.000, 2018: 197.750, 2019: 176.750, 2020: 244.867, 2021: 481.857, 2022: 191.545, 2023: 171.273, 2024: 129.571, 2025: 155.857 },
+      publica:       { 2016: 102.833, 2017: 97.833,  2018: 102.667, 2019: 79.500,  2020: 84.417,  2021: 138.000, 2022: 53.583,  2023: 55.167,  2024: 122.000, 2025: 126.800 },
+      negros:        { 2016: 46.000,  2017: 27.000,  2018: 46.000,  2019: 32.000,  2020: null,    2021: null,    2022: 32.500,  2023: 41.500,  2024: 43.000,  2025: 62.000 },
+      negrosPublica: { 2016: null,    2017: null,    2018: null,    2019: null,    2020: 19.667,  2021: 27.000,  2022: 22.333,  2023: 16.667,  2024: 14.250,  2025: 15.750 },
+      pcd:           { 2016: null,    2017: null,    2018: null,    2019: null,    2020: null,    2021: null,    2022: 16.000,  2023: 23.500,  2024: 39.500,  2025: 47.500 },
+      total:         { 2016: 162.714, 2017: 143.067, 2018: 149.600, 2019: 128.200, 2020: 158.167, 2021: 283.667, 2022: 97.133,  2023: 90.867,  2024: 98.000,  2025: 114.741 }
+    }
+  },
+  {
+    curso: "Artes Visuais",
+    detalhe: "Licenciatura - Vespertino",
+    historico: {
+      universal: { 2016: 4.778, 2017: 4.778 },
+      publica:   { 2016: 3.286, 2017: 3.286 },
+      negros:    { 2016: 2.500, 2017: 2.500 },
+      total:     { 2016: 3.944, 2017: 3.944 }
+    }
+  },
+  {
+    curso: "Ciências Biológicas",
+    detalhe: "Bacharelado - Integral",
+    historico: {
+      universal: { 2016: null, 2017: 12.250 },
+      publica:   { 2016: null, 2017: 5.200 },
+      negros:    { 2016: null, 2017: 0 },
+      total:     { 2016: null, 2017: 8.333 }
+    }
+  },
+  {
+    curso: "Ciências Biológicas",
+    detalhe: "Licenciatura - Vespertino",
+    historico: {
+      universal: { 2016: 6.750, 2017: 6.750 },
+      publica:   { 2016: 3.000, 2017: 3.000 },
+      negros:    { 2016: 0,     2017: 0 },
+      total:     { 2016: 4.667, 2017: 4.667 }
+    }
+  },
+  {
+    curso: "Música",
+    detalhe: "Licenciatura - Vespertino",
+    historico: {
+      universal: { 2016: 4.714, 2017: 4.286 },
+      publica:   { 2016: 2.500, 2017: 1.571 },
+      negros:    { 2016: 1.000, 2017: 1.000 },
+      total:     { 2016: 3.333, 2017: 2.800 }
+    }
+  },
+  {
+    curso: "Química",
+    detalhe: "Licenciatura - Noturno",
+    historico: {
+      universal: { 2016: 4.800, 2017: 6.400 },
+      publica:   { 2016: 7.000, 2017: 5.000 },
+      negros:    { 2016: 2.000, 2017: 1.000 },
+      total:     { 2016: 5.400, 2017: 5.300 }
+    }
+  }
+];
+
+const categoriaLabels = {
+  universal: "Ampla Concorrência",
+  publica: "Escola Pública",
+  negros: "Negros",
+  negrosPublica: "Negros / Escola Pública",
+  pcd: "PCD",
+  total: "Média Total"
+};
+
+const categoriaCores = {
+  universal: "#2563eb",
+  publica: "#16a34a",
+  negros: "#d97706",
+  negrosPublica: "#9333ea",
+  pcd: "#dc2626",
+  total: "#475569"
+};
+
+const selectEl = document.getElementById("cursoSelect");
+const ctx = document.getElementById("graficoConcorrencia").getContext("2d");
+let meuGrafico = null;
+
+dadosConcorrencia.forEach((item, index) => {
+  const option = document.createElement("option");
+  option.value = index;
+  option.textContent = `${item.curso} (${item.detalhe})`;
+  selectEl.appendChild(option);
+});
+
+function atualizarGrafico(index) {
+  const itemSelecionado = dadosConcorrencia[index];
+
+  const datasets = Object.keys(itemSelecionado.historico).map(catKey => {
+    const dadosAno = itemSelecionado.historico[catKey];
+    const data = anos.map(ano => dadosAno[ano] !== undefined ? dadosAno[ano] : null);
+
+    return {
+      label: categoriaLabels[catKey] || catKey,
+      data: data,
+      borderColor: categoriaCores[catKey] || "#000",
+      backgroundColor: categoriaCores[catKey] || "#000",
+      borderWidth: 2,
+      pointRadius: 4,
+      pointHoverRadius: 6,
+      tension: 0.2,
+      spanGaps: true
+    };
+  });
+
+  if (meuGrafico) {
+    meuGrafico.destroy();
+  }
+
+  meuGrafico = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: anos,
+      datasets: datasets
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: {
+          callbacks: {
+            label: (context) => `${context.dataset.label}: ${context.raw !== null ? context.raw.toFixed(2) + ' cand/vaga' : 'Sem dados'}`
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true,
+          title: { display: true, text: 'Candidatos por Vaga' }
+        },
+        x: {
+          title: { display: true, text: 'Ano' }
+        }
+      }
+    }
+  });
+}
+
+selectEl.addEventListener("change", (e) => atualizarGrafico(e.target.value));
+atualizarGrafico(0);
+</script>
+
+</body>
+</html>

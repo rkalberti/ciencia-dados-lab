@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Histórico de Notas de Corte</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    :root {
+      --bg-color: #f8fafc;
+      --card-bg: #ffffff;
+      --text-color: #0f172a;
+      --border-color: #e2e8f0;
+    }
+
+    body {
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-color);
+      margin: 0;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+
+    .card {
+      background: var(--card-bg);
+      border-radius: 12px;
+      padding: 24px;
+      box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+      border: 1px solid var(--border-color);
+    }
+
+    header {
+      margin-bottom: 24px;
+    }
+
+    h1 {
+      font-size: 1.5rem;
+      margin: 0 0 8px 0;
+    }
+
+    p {
+      color: #64748b;
+      margin: 0;
+    }
+
+    .controls {
+      margin: 20px 0;
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+
+    select {
+      padding: 10px 14px;
+      border-radius: 8px;
+      border: 1px solid var(--border-color);
+      background-color: #fff;
+      font-size: 1rem;
+      color: var(--text-color);
+      outline: none;
+      cursor: pointer;
+    }
+
+    select:focus {
+      border-color: #2563eb;
+    }
+
+    .chart-container {
+      position: relative;
+      height: 450px;
+      width: 100%;
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="card">
+    <header>
+      <h1>Painel de Notas de Corte (2016 - 2025)</h1>
+      <p>Selecione um curso para visualizar a evolução histórica das notas por modalidade de cota.</p>
+    </header>
+
+    <div class="controls">
+      <label for="cursoSelect"><strong>Curso:</strong></label>
+      <select id="cursoSelect"></select>
+    </div>
+
+    <div class="chart-container">
+      <canvas id="graficoNotas"></canvas>
+    </div>
+  </div>
+</div>
+
+<script>
+const notasDeCorte = [
+    {
+      curso: "Medicina",
+      modalidade: "bacharelado",
+      historicoCotas: {
+        universal: { 2016: "5868", 2017: "5484", 2018: "5784", 2019: "5650", 2020: "5910", 2021: "6160", 2022: "5857", 2023: "6312", 2024: "6118", 2025: "6352" },
+        publica: { 2016: "5142", 2017: "4971", 2018: "5224", 2019: "5101", 2020: "5206", 2021: "5587", 2022: "5139", 2023: "5514", 2024: "5789", 2025: "5975" },
+        negros: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: "5151", 2023: "5965", 2024: "5285", 2025: "5736" },
+        negrosPublica: { 2016: "4499", 2017: "4400", 2018: "4857", 2019: "4648", 2020: "4397", 2021: "4177", 2022: "4185", 2023: "4032", 2024: "4363", 2025: "4624" },
+        pcd: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: "4210", 2023: "5657", 2024: "5380", 2025: "5933" }
+      }
+    },
+    {
+      curso: "Ciências Biológicas",
+      modalidade: "bacharelado",
+      historicoCotas: {
+        universal: { 2016: "3663", 2017: "3177", 2018: "3409", 2019: "3511", 2020: "3073", 2021: "3650", 2022: "3525", 2023: "3842", 2024: "3547", 2025: "3773" },
+        publica: { 2016: "2393", 2017: "2374", 2018: "2886", 2019: "2737", 2020: "2146", 2021: "2744", 2022: "2410", 2023: "2765", 2024: "2788", 2025: "3133" },
+        negros: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: "2595", 2023: null, 2024: null, 2025: "2435" },
+        negrosPublica: { 2016: null, 2017: null, 2018: "2608", 2019: null, 2020: null, 2021: "2473", 2022: "2133", 2023: "2298", 2024: "2305", 2025: "2993" },
+        pcd: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: null, 2023: null, 2024: "1635", 2025: "2798" }
+      }
+    },
+    {
+      curso: "Ciências Biológicas",
+      modalidade: "licenciatura",
+      historicoCotas: {
+        universal: { 2016: "2898", 2017: "3064", 2018: "3329", 2019: "3288", 2020: "2508", 2021: "2119", 2022: "1520", 2023: "3552", 2024: "4004", 2025: "3837" },
+        publica: { 2016: "2162", 2017: "2166", 2018: "2109", 2019: "2718", 2020: "1859", 2021: "2519", 2022: "2182", 2023: "2560", 2024: "2873", 2025: "3187" },
+        negros: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: null, 2023: null, 2024: null, 2025: null },
+        negrosPublica: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: null, 2023: "2041", 2024: null, 2025: "1811" },
+        pcd: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: null, 2023: "3663", 2024: "3068", 2025: null }
+      }
+    },
+    {
+      curso: "Química",
+      modalidade: "licenciatura",
+      historicoCotas: {
+        universal: { 2016: "2418", 2017: "2749", 2018: "3100", 2019: "3100", 2020: "2017", 2021: "2103", 2022: "1494", 2023: "3123", 2024: "3505", 2025: "3074" },
+        publica: { 2016: "2563", 2017: "2462", 2018: "2437", 2019: "2437", 2020: "2003", 2021: "1926", 2022: "1710", 2023: "2484", 2024: "2398", 2025: "2389" },
+        negros: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: null, 2023: null, 2024: "2564", 2025: null },
+        negrosPublica: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: null, 2023: null, 2024: null, 2025: null },
+        pcd: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: null, 2023: null, 2024: null, 2025: "1913" }
+      }
+    },
+    {
+      curso: "Música",
+      modalidade: "licenciatura",
+      historicoCotas: {
+        universal: { 2016: "2160", 2017: "2318", 2018: "1723", 2019: "2728", 2020: "2219", 2021: null, 2022: "2450", 2023: "2645", 2024: "3680", 2025: "2107" },
+        publica: { 2016: "1708", 2017: "2227", 2018: "2459", 2019: "839", 2020: "2314", 2021: null, 2022: "2006", 2023: "2497", 2024: "2531", 2025: "2642" },
+        negros: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: null, 2023: null, 2024: null, 2025: null },
+        negrosPublica: { 2016: null, 2017: "2171", 2018: null, 2019: null, 2020: "3025", 2021: null, 2022: null, 2023: null, 2024: "3261", 2025: null },
+        pcd: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: null, 2023: "2278", 2024: "2245", 2025: null }
+      }
+    },
+    {
+      curso: "Administração",
+      modalidade: "bacharelado",
+      historicoCotas: {
+        universal: { 2016: "2976", 2017: "3143", 2018: "3351", 2019: "3139", 2020: "2985", 2021: "3658", 2022: "3302", 2023: "3313", 2024: "3522", 2025: "3419" },
+        publica: { 2016: "2559", 2017: "2895", 2018: "2906", 2019: "2735", 2020: "2699", 2021: "3078", 2022: "2716", 2023: "2734", 2024: "3277", 2025: "3171" },
+        negros: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: "1381", 2023: "2334", 2024: "2262", 2025: "2171" },
+        negrosPublica: { 2016: "1902", 2017: "2301", 2018: "2287", 2019: "2658", 2020: "2129", 2021: "2449", 2022: "1376", 2023: "2117", 2024: "2065", 2025: "2575" },
+        pcd: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: "1929", 2023: "2643", 2024: "1833", 2025: "897" }
+      }
+    },
+    {
+      curso: "Artes Visuais",
+      modalidade: "licenciatura",
+      historicoCotas: {
+        universal: { 2016: "2596", 2017: "3110", 2018: "3081", 2019: "3329", 2020: "2773", 2021: null, 2022: "3114", 2023: "3539", 2024: "3945", 2025: "3642" },
+        publica: { 2016: "2354", 2017: "2643", 2018: "2840", 2019: "2540", 2020: "2079", 2021: null, 2022: "2633", 2023: "2753", 2024: "3566", 2025: "3130" },
+        negros: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: null, 2023: null, 2024: "3229", 2025: "3512" },
+        negrosPublica: { 2016: null, 2017: "1919", 2018: null, 2019: "2201", 2020: null, 2021: null, 2022: "1981", 2023: "3163", 2024: "2462", 2025: "2648" },
+        pcd: { 2016: null, 2017: null, 2018: null, 2019: null, 2020: null, 2021: null, 2022: "3942", 2023: "2744", 2024: "2372", 2025: "2747" }
+      }
+    }
+];
+
+const cotaLabels = {
+  universal: "Ampla Concorrência",
+  publica: "Escola Pública",
+  negros: "Negros",
+  negrosPublica: "Escola Pública + Negros",
+  pcd: "PCD"
+};
+
+const cotaCores = {
+  universal: "#2563eb",
+  publica: "#16a34a",
+  negros: "#d97706",
+  negrosPublica: "#9333ea",
+  pcd: "#dc2626"
+};
+
+const anos = ["2016", "2017", "2018", "2019", "2020", "2021", "2022", "2023", "2024", "2025"];
+
+const selectEl = document.getElementById("cursoSelect");
+const ctx = document.getElementById("graficoNotas").getContext("2d");
+let meugrafico = null;
+
+notasDeCorte.forEach((item, index) => {
+  const option = document.createElement("option");
+  option.value = index;
+  option.textContent = `${item.curso} (${item.modalidade})`;
+  selectEl.appendChild(option);
+});
+
+function parseValor(val) {
+  if (val === null || isNaN(val)) return null;
+  return Number(val);
+}
+
+function atualizarGrafico(index) {
+  const cursoDados = notasDeCorte[index];
+
+  const datasets = Object.keys(cursoDados.historicoCotas).map(cotaKey => {
+    const historico = cursoDados.historicoCotas[cotaKey];
+    const data = anos.map(ano => parseValor(historico[ano]));
+
+    return {
+      label: cotaLabels[cotaKey] || cotaKey,
+      data: data,
+      borderColor: cotaCores[cotaKey] || "#000",
+      backgroundColor: cotaCores[cotaKey] || "#000",
+      borderWidth: 2,
+      spanGaps: true,
+      tension: 0.2
+    };
+  });
+
+  if (meugrafico) {
+    meugrafico.destroy();
+  }
+
+  meugrafico = new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: anos,
+      datasets: datasets
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { position: 'bottom' },
+        tooltip: {
+          callbacks: {
+            label: (context) => `${context.dataset.label}: ${context.raw !== null ? context.raw : 'Sem dados'}`
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: false,
+          title: { display: true, text: 'Pontuação / Nota' }
+        },
+        x: {
+          title: { display: true, text: 'Ano' }
+        }
+      }
+    }
+  });
+}
+
+selectEl.addEventListener("change", (e) => atualizarGrafico(e.target.value));
+atualizarGrafico(0);
+</script>
+
+</body>
+</html>
+
+```
